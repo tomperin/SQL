@@ -1,0 +1,50 @@
+/* Create tables about authors and what they do here*/
+
+/*Create author table*/
+
+CREATE TABLE author_info (id INTEGER PRIMARY KEY AUTOINCREMENT,author_name TEXT, birthday TEXT);
+
+/*Insert rows*/
+
+INSERT INTO author_info VALUES (1, "Ayn Rand", "02/02/1905");
+INSERT INTO author_info VALUES (2, "Stephen King", "09/21/1947");
+INSERT INTO author_info VALUES (3, "J.K. Rowling", "07/31/1965");
+INSERT INTO author_info VALUES (4, "Gabriel Garcia Marquez", "03/06/1927");
+INSERT INTO author_info VALUES (5, "Toni Morrison", "02/18/1931");
+INSERT INTO author_info VALUES (6, "John Steinbeck", "02/27/1902");
+
+/*Create literary works table*/
+
+CREATE TABLE literary_works (id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT, publish_year INTEGER, author_id INTEGER);
+
+/*Insert rows*/
+
+INSERT INTO literary_works (title, publish_year, author_id) VALUES ("Atlas Shrugged", 1957, 1);
+INSERT INTO literary_works (title, publish_year, author_id) VALUES ("The Fountainhead", 1943, 1);
+INSERT INTO literary_works (title, publish_year, author_id) VALUES ("Anthem", 1938, 1);
+
+INSERT INTO literary_works (title, publish_year, author_id) VALUES ("Doctor Sleep", 2013, 2);
+INSERT INTO literary_works (title, publish_year, author_id) VALUES ("The Shining", 1977, 2);
+INSERT INTO literary_works (title, publish_year, author_id) VALUES ("11/22/63", 2011, 2);
+
+INSERT INTO literary_works (title, publish_year, author_id) VALUES ("Harry Potter and the Chamber of Secrets", 1998, 3);
+INSERT INTO literary_works (title, publish_year, author_id) VALUES ("The Casual Vacancy", 2012, 3);
+INSERT INTO literary_works (title, publish_year, author_id) VALUES ("Harry Potter and the Sorcerer's Stone", 1997, 3);
+
+INSERT INTO literary_works (title, publish_year, author_id) VALUES ("One Hundred Years of Solitude", 1967, 4);
+INSERT INTO literary_works (title, publish_year, author_id) VALUES ("Love in the Time of Cholera", 1985, 4);
+INSERT INTO literary_works (title, publish_year, author_id) VALUES ("Chronicle of a Death Foretold", 1981, 4);
+
+INSERT INTO literary_works (title, publish_year, author_id) VALUES ("Beloved", 1987, 5);
+INSERT INTO literary_works (title, publish_year, author_id) VALUES ("The Bluest Eye", 1970, 5);
+INSERT INTO literary_works (title, publish_year, author_id) VALUES ("Song of Solomon", 1977, 5);
+
+INSERT INTO literary_works (title, publish_year, author_id) VALUES ("Of Mice and Men", 1937, 6);
+INSERT INTO literary_works (title, publish_year, author_id) VALUES ("The Grapes of Wrath", 1939, 6);
+INSERT INTO literary_works (title, publish_year, author_id) VALUES ("East of Eden", 1952, 6);
+
+/*What literary works did these authors write?*/
+
+SELECT author_info.author_name, literary_works.title FROM literary_works
+JOIN author_info
+ON author_info.id = literary_works.author_id;
