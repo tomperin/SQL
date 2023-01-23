@@ -1,4 +1,4 @@
---create a store database
+--Create a store database
 
 CREATE table store_items (id INTEGER PRIMARY KEY, name TEXT, dollars INTEGER, quantity INTEGER, description TEXT);
 INSERT INTO store_items VALUES (1, "flat screen tv", 400, 15, "high-class item");
@@ -7,11 +7,11 @@ INSERT INTO store_items VALUES (3, "laptop", 500, 150, "light-weight and easy to
 INSERT INTO store_items VALUES (4, "computer keyboard", 30, 40, "wireless keyboard for computer");
 INSERT INTO store_items VALUES (5, "iPad 8", 900, 68, "newest iPad model");
 
---display the database ordered by price
+--Display the database ordered by price
 
 SELECT * FROM store_items 
 ORDER BY dollars asc;
 
 --what is the sum of the quantity of items?
 
-SELECT SUM (quantity) from store_items
+SELECT SUM (quantity) from store_items;
