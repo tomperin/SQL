@@ -1,0 +1,38 @@
+/*Show customers (their full names, customer ID, and country) who are not in Canada*/
+
+SELECT FirstName, LastName, CustomerID, Country 
+FROM chinook.customers
+WHERE country <> 'Canada';
+
+/*Show only the customers from the Czech Republic*/
+
+SELECT *
+FROM chinook.customers
+WHERE country = 'Czech Republic';
+
+/*Find the Invoices of customers who are from Brazil. The resulting table should show the customer's full name, Invoice ID, 
+Date of the invoice, and billing country.*/
+
+SELECT cust.FirstName, cust.LastName, inv.InvoiceID, inv.InvoiceDate, inv.BillingCountry
+FROM chinook.invoices AS inv
+LEFT JOIN chinook.customers AS cust
+ON inv.CustomerId = cust.CustomerId
+WHERE inv.BillingCountry = 'Brazil';
+
+/*Show the employees who are IT staff*/
+
+SELECT * FROM chinook.employees
+WHERE title = 'IT Staff';
+
+/*Find a unique/distinct list of billing countries from the Invoice table.*/
+
+SELECT DISTINCT billingcountry
+FROM chinook.invoices;
+
+/*Provide a query that shows the invoices associated with each sales agent. The resulting table should include the Sales Agent's full name.*/
+
+SELECT emp.FirstName, emp.LastName, inv.InvoiceId
+FROM chinook.employees emp
+JOIN chinook.customers cust
+ON cust.supportrepid = emp.employeeid
+JOIN chinook.invoices inv ON inv.customerid = cust.customerid;
