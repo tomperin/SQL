@@ -1,3 +1,7 @@
+/*Querying a music sales database with 11 different tables. Table names include albums, artists, customers, employees, genres, invoice items, invoices, media types,
+playlist tracks, playlists, and tracks*/
+
+
 /*Show customers (their full names, customer ID, and country) who are not in Canada*/
 
 SELECT FirstName, LastName, CustomerID, Country 
@@ -66,5 +70,47 @@ JOIN chinook.invoice_items inv_lineid
 ON trackname.trackid = inv_lineid.trackid;
 
 /*Provide a query that shows all the Tracks, and include the Album name, Media type, and Genre.*/
+
+SELECT t.name AS 'track name', a.title AS 'album title', mt.name AS 'media type', g.name AS 'genre'
+FROM chinook.tracks t
+JOIN chinook.albums a
+ON t.albumid = a.albumid
+JOIN chinook.media_types mt
+ON mt.mediatypeid = t.mediatypeid
+JOIN chinook.genres g
+ON g.genreid = t.genreid;
+
+/*Show the total sales made by each sales agent.*/
+
+SELECT emp.firstname, emp.lastname,
+ROUND (SUM(inv.total), 2) AS 'Total Sales'
+FROM chinook.employees emp
+
+JOIN chinook.customers cust
+ON cust.supportrepid = emp.employeeid
+
+JOIN chinook.invoices inv
+ON inv.customerid = cust.customerid
+
+WHERE emp.title = 'Sales Support Agent'
+GROUP BY emp.firstname;
+
+/*Which sales agent made the most dollars in sales in 2009?*/
+
+SELECT emp.firstname, emp.lastname,
+ROUND (SUM(inv.total), 2) AS 'Total Sales'
+FROM chinook.employees emp
+
+JOIN chinook.customers cust
+ON cust.supportrepid = emp.employeeid
+
+JOIN chinook.invoices inv
+ON inv.customerid = cust.customerid
+
+WHERE emp.title = 'Sales Support Agent'
+AND inv.InvoiceDate LIKE '2009%'
+GROUP BY emp.firstname
+ORDER BY (ROUND(sum(inv.total),2)) DESC 
+LIMIT 1;
 
 
